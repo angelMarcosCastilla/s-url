@@ -11,7 +11,9 @@ export async function POST (request: Request) {
   const parsedContentFile = await readFileData(pathFile)
   parsedContentFile.data.push({ short: urlShort, large: url })
 
+  const urlShortened = `${request.url}/${urlShort}`
+
   await writeFileData(pathFile, parsedContentFile)
 
-  return NextResponse.json({ body: { short: urlShort, large: url } })
+  return NextResponse.json({ body: { short: urlShortened, large: url } })
 }
