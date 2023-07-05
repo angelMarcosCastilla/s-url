@@ -21,12 +21,12 @@ export default function Form () {
     const data = await res.json()
     setShortUrl(data.body.short)
   }
-  console.log(shortUrl)
   return (
     <>
-      <form onSubmit={handleSubmit} className=' bg-red-500'>
-        <div>
+      <form onSubmit={handleSubmit} className='mb-6 '>
+        <div className='relative flex flex-row py-2 px-3 bg-slate-100 border-2 border-slate-200 rounded-lg '>
           <input
+            className='py-2 px-3 w-full  outline-none bg-transparent'
             type='text'
             name='url'
             id='url'
@@ -34,7 +34,9 @@ export default function Form () {
             onChange={(e) => setUrl(e.target.value)}
             placeholder='https://example.com'
           />
-          <button type='submit'>Acortar</button>
+          <button className=' px-9  bg-emerald-900 hover:bg-emerald-800 text-white rounded-lg ' type='submit'>
+            Acortar
+          </button>
         </div>
       </form>
       {shortUrl !== '' && <Copy shortUrl={shortUrl} />}
