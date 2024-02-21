@@ -1,19 +1,17 @@
-import { readFileData, writeFileData } from '@/utils/utils'
 import { NextResponse } from 'next/server'
-import path from 'node:path'
+import { client } from '../../dbConnect'
 
 export async function POST (request: Request) {
   const { url } = await request.json()
-
   const urlShort = crypto.randomUUID().slice(0, 7)
 
-  const pathFile = path.join(process.cwd(), 'src', 'database', 'data.json')
-  const parsedContentFile = await readFileData(pathFile)
-  parsedContentFile.data.push({ short: urlShort, large: url })
+  await client.connect()
+  await client.set(urlShort, url)
+  await client.disconnect()
 
-  const urlShortened = `${request.url}/${urlShort}`
+  const urlRequest = new URL(request.url)
+  const baseUrl = urlRequest.origin
+  const shortUrl = `${baseUrl}/${urlShort}`
 
-  await writeFileData(pathFile, parsedContentFile)
-
-  return NextResponse.json({ body: { short: urlShortened, large: url } })
+  return NextResponse.json({ body: { short: shortUrl, large: url } })
 }

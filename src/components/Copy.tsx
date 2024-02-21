@@ -8,7 +8,7 @@ export default function Copy ({ shortUrl }: { shortUrl: string }) {
   }
   return (
     <>
-      <div className='w-full bg-emerald-50 py-3 px-4 flex justify-between border-[1px] border-emerald-500 rounded-lg text-emerald-900'>
+      <div className='w-full  py-3 px-4 flex justify-between border-[1px] border-emerald-500 rounded-lg text-emerald-100'>
         <span>{shortUrl}</span>
         <button className='hover:text-emerald-600' type='button' onClick={handleCopy}>
           <svg
@@ -28,7 +28,6 @@ export default function Copy ({ shortUrl }: { shortUrl: string }) {
           </svg>
         </button>
       </div>
-      <Toaster position='top-center' richColors />
     </>
   )
 }
