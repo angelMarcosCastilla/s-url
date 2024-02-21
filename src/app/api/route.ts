@@ -5,9 +5,7 @@ export async function POST (request: Request) {
   const { url } = await request.json()
   const urlShort = crypto.randomUUID().slice(0, 7)
 
-  await client.connect()
   await client.set(urlShort, url)
-  await client.disconnect()
 
   const urlRequest = new URL(request.url)
   const baseUrl = urlRequest.origin

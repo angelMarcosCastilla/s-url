@@ -1,9 +1,3 @@
-import { createClient } from 'redis'
+import Redis from 'ioredis'
 
-export const client = createClient({
-  url: process.env.URL_REDIS
-})
-
-client.on('error', function (err) {
-  throw err
-})
+export const client = new Redis(process.env.URL_REDIS as string)
